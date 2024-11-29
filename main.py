@@ -3,14 +3,17 @@ from bs4 import BeautifulSoup
 
 
 def main():
-    url = "https://tl.rulate.ru/book/16292/327323/ready_new"
+    url = "https://edelws.ru/power-pc/edelweiss-msi-gaming/"
     response = requests.get(url)
     print(response.status_code)
+    # print(response.text)
 
     soup = BeautifulSoup(response.text, "html.parser")
-    part = soup.find("div", class_="text-container")
+    spoon = soup.find_all("div", class_="detalic__text")
+    # print(spoon)
+
     with open("page.txt", 'a', encoding="UTF-8") as file:
-        file.write(part.text)
+        file.write(''.join([i.text for i in spoon]))
 
 
 if __name__ == "__main__":
